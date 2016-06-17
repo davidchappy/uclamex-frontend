@@ -1,0 +1,33 @@
+@import 'https://fonts.googleapis.com/css?family=Lato:400,400i,700';
+
+/* Colors */
+
+/*
+
+blue - #3C6AE2
+red - #D0021B
+orange - #F5A623
+
+bluish-gray - #3D464D
+medium gray - #4A4A4A
+light gray - #9B9B9B
+white - #fff
+
+*/
+
+
+/* Base Styles */
+
+body {
+	font-size: 16px;
+	font-family: 'Lato', Helvetica, sans-serif;
+	color: #4A4A4A;
+	background-color: #fff;
+}
+
+ul,
+li {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
