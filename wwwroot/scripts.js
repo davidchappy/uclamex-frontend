@@ -18,8 +18,14 @@ $(".list-item").hover(
 	}
 ); 
 
-
-// Make rows clickable
+// Make list rows clickable
 $(".list-item").click(function() {
   window.document.location = $(this).data("href");
 });
+
+// Hide sidebar when clicking nav link
+$("#nav-link").click(function(event) {
+	event.preventDefault();
+	$("#sidebar").css("width", "0");
+	$("#primary-view").css("width", "100%");
+})
