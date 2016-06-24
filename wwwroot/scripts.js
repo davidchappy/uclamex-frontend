@@ -24,8 +24,32 @@ $(".list-item").click(function() {
 });
 
 // Hide sidebar when clicking nav link
-$("#nav-link").click(function(event) {
-	event.preventDefault();
-	$("#sidebar").css("width", "0");
-	$("#primary-view").css("width", "100%");
-})
+// $("#nav-link").click(function(event) {
+// 	event.preventDefault();
+// 	$("#sidebar").css("width", "0");
+// 	$("#primary-view").css("width", "100%");
+// })
+
+// Get pages (using Ajax) by link's id name
+function getPage(pageName) {
+	console.log("You got this far!");
+	$.ajax({
+		url: pageName + ".html",
+		cache: false
+	}).done(function( html ) {
+			$("#main-content").html(html);
+		})	
+}
+
+// Function and request to bind nav links to the getPage function
+function bindNavLinks() {
+	$(".nav-item a").each(function() {
+		var idName = $(this).attr("id");
+		console.log(idName);
+		$(this).click(function() {
+			console.log("you clicked");
+			getPage(idName);
+		});
+	}); 
+}
+bindNavLinks();
