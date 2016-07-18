@@ -19,7 +19,8 @@ white - #fff
 * {
 	margin: 0;
 	padding: 0;
-
+	outline: none;
+	border: none;
 }
 
 body {
@@ -66,6 +67,7 @@ input {
 .wrapper {
 	width: 100%;
 	position: relative;
+	
 }
 
 .primary-view {
@@ -77,6 +79,7 @@ input {
 	background: #fff;
 	min-height: 100vh;
 	min-width: 700px;
+	overflow: hidden;
 }
 
 .sidebar {
@@ -98,6 +101,10 @@ header {
 	background: #3C6AE2;
 	padding: 0 15px;
 	color: #fff;
+	position: absolute;
+	right:0;
+	top:0;
+	width: 100%;
 }
 
 header p,
@@ -246,6 +253,8 @@ header form {
 
 .main-content {
 	width: 100%;
+	height: 100%;
+	padding-top: 50px;
 }
 
 .main-content svg,
@@ -382,10 +391,10 @@ td {
 }
 
 .list-item {
-	-webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+	-webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  transition: all 0.1s ease;
 }
 
 .list-item-selected {
@@ -424,7 +433,7 @@ td {
 	top: 50%;
 	margin-top: -15px;
 	height: 50px;
-	padding-left: 50px;
+	padding-left: 45px;
 	position: absolute;
 	left: 3px;
 	width: 200px;
@@ -465,9 +474,10 @@ td {
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+	position: relative;
 }
 
-.nav-item svg {
+.nav-item svg:first-of-type {
 	margin-right: 20px;
 	margin-top: -4px;
 	vertical-align: middle;
@@ -479,15 +489,38 @@ td {
 }
 
 .nav-item.selected {
-	background: #3C6AE2 ;
+	background: #3C6AE2;
 }
 
 .nav-item.selected a {
 	color: #fff;
 }
 
-.nav-item.selected svg {
+.nav-item.selected svg:first-of-type {
 	stroke: #fff;
+}
+
+svg.selected-arrow {
+	height: 15px;
+	width: 15px;
+	fill: #fff;
+	stroke: #fff;
+	position: absolute;
+	right: 10px;
+	top: 17.5px;
+}
+
+.nav-item.active {
+	background: #3C6AE2 ;
+}
+
+.nav-item.active a {
+	color: #fff;
+}
+
+.nav-item.active svg {
+	stroke: #fff;
+	display: inline;
 }
 
 .nav-item a {
@@ -636,4 +669,179 @@ td {
 .submit-login:hover {
 	background-color:rgba(60,106,226,.9); 
 	box-shadow: 0 0 2px 0 #fff;
+}
+
+/* Calificaciones */
+
+.inner-main-header {
+	height: 70px;
+	line-height: 70px;
+	position: relative;
+	border-bottom: 2px solid #3C6AE2;
+}
+
+.inner-main-header div {
+	display: inline-block;
+}
+
+.inner-main-header svg {
+	height: 30px;
+	width: 31px;
+	fill: none;
+	stroke: #4A4A4A;
+	position: absolute;
+	top: 20px;
+	left: 15px;
+}
+
+.inner-main-header h2 {
+	margin-left: 60px;
+	font-weight: 400;
+	height: 1.2rem;
+	font-size: 1.2rem;
+	letter-spacing: 1px;
+}
+
+.calif-subnav {
+	height: 35px;
+	position: absolute;
+	bottom: 0;
+	left: 30%;
+	line-height: 35px;
+}
+
+.calif-subnav sup {
+	text-transform: uppercase;
+	margin-right: 5px;
+	font-size: .6em;
+	font-weight: normal;
+}
+
+.calif-subnav a {
+	display: inline-block;
+	font-weight: 400;
+	font-size: .9em;
+	color: #4A4A4A;
+	padding: 0 20px;
+}
+
+.calif-subnav a:hover {
+	color: #fff;
+	background: #3C6AE2; 
+}
+
+.calif-subnav .active {
+	color: #fff;
+	background: #3C6AE2; 
+}
+
+.header-button-right {
+	float: right;
+	margin-right: 20px;
+	height: 100%;
+}
+
+.add-grades-btn {
+	height: 100%;
+	font-size: .9em;
+	font-weight: 400;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 0 20px;
+	background: #F5A623;
+	color: #fff;
+	border-radius: 2px;
+	height: 35px;
+	line-height: 35px;
+	margin-top: 17.5px;
+}
+
+/* por-clase */
+
+.calif-main-content {
+	position: relative;
+	height: 100%;
+	background: #eee;
+}
+
+.column-calif-carrera,
+.column-calif-clases,
+.column-calif-grades {
+	background: #fff;
+/*	border: solid 1px red;*/
+}
+
+.calif-main-content tr {
+	width: 100%;
+	overflow: hidden;
+}
+
+.calif-main-content td { 
+	font-size: .8em;
+	max-height: 1.3em;
+	padding-left: 15px;
+}
+
+.calif-main-content th { 
+	font-size: .9em;
+	padding: 15px;
+}
+
+.calif-main-content th,
+.calif-main-content td {
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.column-calif-carrera {
+	height: 100%;
+	position: absolute;
+	left:0;
+	top:0;
+	bottom: 0;
+}
+
+.column-calif-carrera .list {
+	width: 125px;
+}
+
+.column-calif-carrera td {
+	max-width: 125px;
+}
+
+.column-calif-clases {
+	position: absolute;
+	left: 125px;
+	height: 100%;
+	border-right: 1px solid #9B9B9B;
+	border-left: 1px solid #9B9B9B;
+}
+
+.column-calif-clases .list {
+	width: 150px;
+}
+
+.column-calif-clases td {
+	max-width: 150px;
+}
+
+.column-calif-grades {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left:277px;
+	text-align: left;
+	height: 100%;
+}
+
+.column-calif-grades .list {
+	width: inherit !important;
+}
+
+.column-calif-grades th,
+.column-calif-grades td {
+	padding-right: 10px;
 }
