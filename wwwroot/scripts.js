@@ -88,6 +88,25 @@ bindNavLinks();
 // ******* Calificaciones Section *******
 
 
+// *** Add Calificaciones Form *** //
+
+$(document).on('click', '#add-grades', function(event) {
+	event.preventDefault();
+	console.log('clicked');
+	$('.modal-popup').css('display', 'block');
+});
+
+$('#close-form').click(function(event) {
+	$('#add-grades-popup').css('display', 'none');
+});
+
+$('#add-student-button').click(function(event) {
+	event.preventDefault();
+	$('#alumnos').append('<select name="alumno" class="alumno-select"><option value="" disabled selected>Escoga un alumno</option><option class="alumno-option" value="Jordan Chapman">Jordan Chapman</option><option class="alumno-option" value="Nathan Chapman">Nathan Chapman</option></select>');
+	$('#grades').append('<input type="text" class="new-grade-field" name="grade" placeholder="Calificación">');
+});
+
+
 // *** "Por Clase" view *** //
 
 // All active majors

@@ -78,7 +78,7 @@ input {
 	left: 200px;
 	background: #fff;
 	min-height: 100vh;
-	min-width: 700px;
+	min-width: 500px;
 	overflow: hidden;
 }
 
@@ -90,6 +90,28 @@ input {
 	bottom: 0;
 	background: #3D464D;
 	min-height: 100vh;
+}
+
+.column {
+	display: inline-block;
+	width: 31%;
+	max-width: 31%;
+	overflow: hidden;
+	margin-right: 1%;
+}
+
+.column-2 {
+	width: 61%;
+	max-width: 61%;
+}
+
+.column label,
+.column select {
+	display: block;
+}
+
+fieldset * {
+	display: inline-block;
 }
 
 
@@ -756,6 +778,176 @@ svg.selected-arrow {
 	margin-top: 17.5px;
 }
 
+/* add grades pop-up form */
+
+.modal-popup {
+	display: none;
+	position: absolute; 
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: rgba(0,0,0,.6);
+	min-height: 100vh;
+	height: 100vh;
+	max-width: 100vw;
+	width: 100vw;
+	overflow: scroll;
+}
+
+.form-container {
+	display: block;
+	position: absolute;
+	top: 100px;
+	width: 600px;
+	left: 50%;
+	margin-left: -300px;
+	background: #fff;
+}
+
+.form-header {
+	background: #3C6AE2;
+	font-size: 1.2em;
+	font-weight: 400;
+	color: #fff;
+	text-align: center;
+	height: 55px;
+	line-height: 55px;
+	letter-spacing: 2px;
+	position: relative;
+}
+
+#close-form {
+	font-size: 1.2em;
+	color: rgba(255,255,255,.8);
+	position: absolute;
+	right: 15px;
+	top: 2px;
+	cursor: pointer;
+	font-weight: 400;
+}
+
+#add-grades-popup form {
+	padding: 20px;
+}
+
+fieldset {
+	margin-bottom: 1rem;
+}
+
+#add-grades-popup form label {
+	font-size: 1.1em;
+	font-weight: 400;
+	color: #3D464D;
+}
+
+select {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 4px;
+	color: #9B9B9B;
+	background: #fff;
+	border: 1px solid #9B9B9B;
+	border-radius: 1px;
+	height: 30px;
+	line-height: 30px;
+	font-size: .9em;
+}
+
+option {
+	color: #3D464D;
+}
+
+input[type="radio"] {
+	margin-left: .1rem;
+	cursor: pointer;
+}
+
+.radio-label {
+	margin-left: .3rem;
+	margin-right: .6rem;
+	margin-bottom: 2rem;
+}
+
+form hr {
+  border: 0;
+  display: block;
+  width: 96%;               
+  background-color: rgba(151,151,151,.6);
+  height: 1px;
+  margin-bottom: 2rem;
+}
+
+.student-grade-listing {
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.student-grade-listing label,
+.student-grade-listing select,
+.student-grade-listing fieldset {
+	display: block;
+}
+
+.alumno-select,
+.new-grade-field {
+	margin-bottom: 1rem;
+}
+
+/*.student-grade-listing .column-2 {
+	position: absolute;
+	left: 0;
+}*/
+
+.student-grade-listing .column {
+	position: absolute;
+	right: 18px;
+}
+
+.student-grade-listing .column-2 select {
+	width: 80%;
+	margin-right: 20%;
+}
+
+.student-grade-listing input[type="text"] {
+	font-size: .9em;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.new-grade-field {
+	width: 100%;
+	height: 30px;
+	border: 1px solid #9B9B9B;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+form button {
+	border-radius: 3px;
+	color: #fff;
+	font-weight: 400;
+}
+
+.new-student-row {
+	padding: 4px 10px;
+	background: #3C6AE2;
+	margin-bottom: 3rem;
+}
+
+.submit-form {
+	background: #F5A623;
+	width: 200px;
+	padding: 10px auto;
+	height: 40px;
+	font-size: 1em;
+	font-weight: 700;
+}
+
+
+
 /* por-clase */
 
 .calif-main-content {
@@ -768,7 +960,6 @@ svg.selected-arrow {
 .column-calif-clases,
 .column-calif-grades {
 	background: #fff;
-/*	border: solid 1px red;*/
 }
 
 .calif-main-content tr {
@@ -776,24 +967,23 @@ svg.selected-arrow {
 	overflow: hidden;
 }
 
-.calif-main-content td { 
-	font-size: .8em;
-	max-height: 1.3em;
-	padding-left: 15px;
+.calif-main-content .list-item td { 
+	font-size: .9em;
+	height: 1.5em;
+	padding: 7px 10px 7px 15px;
 }
 
 .calif-main-content th { 
-	font-size: .9em;
+	font-size: 1em;
 	padding: 15px;
 }
 
 .calif-main-content th,
 .calif-main-content td {
 	white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-
 
 .column-calif-carrera {
 	height: 100%;
@@ -804,27 +994,27 @@ svg.selected-arrow {
 }
 
 .column-calif-carrera .list {
-	width: 125px;
+	width: 200px;
 }
 
 .column-calif-carrera td {
-	max-width: 125px;
+	max-width: 200px;
 }
 
 .column-calif-clases {
 	position: absolute;
-	left: 125px;
+	left: 200px;
 	height: 100%;
 	border-right: 1px solid #9B9B9B;
 	border-left: 1px solid #9B9B9B;
 }
 
 .column-calif-clases .list {
-	width: 150px;
+	width: 200px;
 }
 
 .column-calif-clases td {
-	max-width: 150px;
+	max-width: 200px;
 }
 
 .column-calif-grades {
@@ -832,7 +1022,7 @@ svg.selected-arrow {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	left:277px;
+	left:402px;
 	text-align: left;
 	height: 100%;
 }
@@ -841,7 +1031,133 @@ svg.selected-arrow {
 	width: inherit !important;
 }
 
-.column-calif-grades th,
-.column-calif-grades td {
-	padding-right: 10px;
+@media (max-width: 1080px) {
+	
+	.column-calif-carrera .list,
+	.column-calif-carrera td,
+	.column-calif-clases .list,
+	.column-calif-clases td
+	 {
+		width: 175px;
+		max-width: 175px;
+	}
+
+	.column-calif-clases {
+		left:175px;	
+	}
+
+	.column-calif-grades {
+		left:352px;	
+	}
+
+	.calif-main-content th {
+		font-size: .9em;
+		padding-left: 10px;	
+	}
+
+	.calif-main-content .list-item td { 
+		font-size: .8em;
+		height: 1.2em;
+		padding: 4px 5px 4px 10px;
+	}
+
 }
+
+@media (max-width: 960px) {
+
+	.inner-main-header svg {
+		height: 24px;
+		width: 25px;
+		top: 23px;
+		left: 10px;
+	}
+
+	.inner-main-header h2 {
+		margin-left: 40px;
+		height: 1rem;
+		font-size: 1rem;
+	}
+	
+	.column-calif-carrera .list,
+	.column-calif-carrera td,
+	.column-calif-clases .list,
+	.column-calif-clases td
+	 {
+		width: 125px;
+		max-width: 125px;
+	}
+
+	.column-calif-clases {
+		left:125px;	
+	}
+
+	.column-calif-grades {
+		left:252px;	
+	}
+
+	.header-button-right {
+		margin-right: 10px;
+	}
+
+	.add-grades-btn {
+		font-size: .8em;
+		padding: 0 10px;
+		height: 25px;
+		line-height: 25px;
+		margin-top: 15px;
+	}
+
+	.calif-subnav {
+		height: 30px;
+		left: 28%;
+		min-left: 190px;
+		line-height: 30px;
+	}
+
+	.calif-subnav sup {
+		margin-right: 3px;
+		font-size: .4em;
+	}
+
+	.calif-subnav a {
+		font-size: 1em;
+		padding: 0 15px;
+	}
+
+	.primary-view {
+		left: 175px;
+	}
+
+	.sidebar {
+		width: 175px;
+	}
+
+	.brand {
+		font-size: .7em;
+		line-height: 1.2;
+		margin-top: -13px;
+		height: 50px;
+		padding-left: 44px;
+		left: 1px;
+		width: 175px;
+	}
+
+	.sidebar-header::before {
+		left: 0px;
+	}
+
+	.nav-item a {
+		font-size: .9em;
+	}
+
+	.main-website {
+		font-size: .7em;
+	}
+
+}
+
+@media (max-width: 860px) {
+	
+	
+}
+
