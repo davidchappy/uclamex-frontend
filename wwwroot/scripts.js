@@ -28,6 +28,8 @@ $(".nav-item").on({
 $(document).on({
 	click: function() {
  		window.document.location = $(this).data("href");
+ 		$(this).siblings('.list-item').removeClass('active');
+ 		$(this).addClass('active');
 	},
 	mouseenter: function() {
 		$(this).siblings().removeClass('list-item-selected');
@@ -38,6 +40,16 @@ $(document).on({
 	}
 }, '.list .list-item');
 
+// Gray out select boxes until clicked
+function selectBox(sel) {
+	$(sel).css('color', '#3D464D');
+}
+function deselectBox(sel) {
+	$(sel).css('color', '#9B9B9B')
+}
+$(document).on('change', 'select', function() {
+	selectBox(this);
+});
 
 // Hide sidebar when clicking nav link
 // $("#nav-link").click(function(event) {
@@ -87,27 +99,7 @@ bindNavLinks();
 
 // ******* Calificaciones Section *******
 
-
-// *** Add Calificaciones Form *** //
-
-$(document).on('click', '#add-grades', function(event) {
-	event.preventDefault();
-	console.log('clicked');
-	$('.modal-popup').css('display', 'block');
-});
-
-$('#close-form').click(function(event) {
-	$('#add-grades-popup').css('display', 'none');
-});
-
-$('#add-student-button').click(function(event) {
-	event.preventDefault();
-	$('#alumnos').append('<select name="alumno" class="alumno-select"><option value="" disabled selected>Escoga un alumno</option><option class="alumno-option" value="Jordan Chapman">Jordan Chapman</option><option class="alumno-option" value="Nathan Chapman">Nathan Chapman</option></select>');
-	$('#grades').append('<input type="text" class="new-grade-field" name="grade" placeholder="Calificación">');
-});
-
-
-// *** "Por Clase" view *** //
+// *** Data *** //
 
 // All active majors
 var majors =  { 
@@ -205,9 +197,120 @@ var courseEventInfo = {
 	}
 };
 
+var studentsByEvent = {
+	1001: {
+		10001: 'Nathan Chapman',
+		10002: 'Jordan Chapman', 
+		10003: 'Erika Chapman'
+	},
+	1002: {
+		10004: 'Isaac Chapman',
+		10005: 'Aaron Bixby',
+		10006: 'David Bixby'
+	},
+	1003: {
+		10007: 'Natalie Chapman',
+		10008: 'Emily Chapman',
+		10009: 'Andrew Chapman'
+	}
+}
+
+// *** Add Calificaciones Form *** //
+
+$(document).ajaxComplete(function(event, xhr, settings) { //make sure page is fully loaded
+	if (settings.url.match("^calificaciones.html")) {
+		$('#form-row2').hide();
+		$('fieldset.student-grade-listing').hide();
+	};
+});
+
+// Load majors into #carrera
+$.each(majors, function(id, major) {
+	$('#carrera').append('<option data-majID="' + id + '" value="' + major + '">' + major + '</option>');	
+});
+
+// Show modal form when + button is clicked 
+$(document).on('click', '#add-grades', function(event) {
+	event.preventDefault();
+	$('.modal-popup').css('display', 'block');
+});
+
+// When major is selected, load matching courses into #clase
+$(document).on('change', '#carrera', function(event) {
+	$('#form-row2').hide();
+	$('fieldset.student-grade-listing').hide();
+	$('#clase').html('<option value="" disabled hidden selected>Escoja</option>');
+	$('#evento').html('<option value="" disabled hidden selected>Escoja una Clase</option>');
+	deselectBox('select');
+	selectBox(this);
+	var id = $('#carrera option:selected').attr('data-majid'); // get selected option's data-majID
+	var courses = majorCourses[id];
+	$.each(courses, function(id, course) {
+		$('#clase').append('<option data-classid="' + id + '" value="' + course + '">' + course + '</option>');
+	});
+});
+
+// When class is selected, load matching events into #evento
+$(document).on('change', '#clase', function(event) {
+	$('#form-row2').hide();
+	$('fieldset.student-grade-listing').hide();
+	$('#evento').html('<option value="" disabled hidden selected>Escoja</option>');
+	deselectBox('#evento');
+	var id = $('#clase option:selected').attr('data-classid'); // get selected option's data-majID
+	var events = courseEventInfo[id];
+	$.each(events, function(id, eventObj) {
+		$('#evento').append('<option data-eventid="' + id + '" value="' + eventObj.gradeEvent + '">' + eventObj.gradeEvent + '</option>');
+	});
+});
+
+// Once both term and parcial radio buttons are checked, show grade rows
+$(document).on('click', '#form-row2 input', function(event) {
+	var n = $('#form-row2 input:checked').length;
+	if (n === 2) {
+		$('fieldset.student-grade-listing').show();
+	};
+});
+
+// When evento is selected, load matching events into first student row 
+$(document).on('change', '#evento', function(event) {
+	$('select.alumno-select option[data-sid]').remove();
+	$('#form-row2').show();
+	// $('select.alumno-select').append('<option value="" disabled selected hidden>Escoga un alumno</option>');
+	var id = $('#evento option:selected').attr('data-eventid');
+	var studentList = studentsByEvent[id];
+	$.each(studentList, function(id, name) {
+		$('select.alumno-select').append('<option data-sid="' + id + '" value="' + name + '">' + name + '</option>');
+	});
+});
+
+// Hide form with x
+$('#close-form').click(function(event) {
+	event.preventDefault();
+	$('#add-grades-popup').css('display', 'none');
+});
+
+// Add new student row
+$('#add-student-button').click(function(event) {
+	event.preventDefault();
+	$('#alumno').append('<tr class="student-grade-row"><td><select name="alumno" class="alumno-select new-row"><option value="" disabled selected hidden>Escoga un alumno</option></select></td><td><input type="text" class="new-grade-field" name="grade" placeholder="Calificación"></td><td><span class="remove-row"></span></td>—</tr>');
+	var id = $('#evento option:selected').attr('data-eventid');
+	var studentList = studentsByEvent[id];
+	$.each(studentList, function(id, name) {
+		$('select.new-row').append('<option data-sid="' + id + '" value="' + name + '">' + name + '</option>');
+	});
+});
+
+// Remove student row
+$(document).on('click', '.remove-row', function(event) {
+	event.preventDefault();
+	$(this).parent().parent().remove();
+});
+
+
+// *** "Por Clase" view *** //
+
 function displayMajors() {
 	// [SELECT MajorName FROM Aca_Majors];
-
 	$.each( majors, function(id, name) {
 		$('#majors').append('<tr class="list-item" data-majID="' + id + '" data-href="#"><td>' + name + '</td></tr>');
 	});
@@ -226,7 +329,6 @@ function getMajorCourses(majorID) {
 function getCourseEvents(courseID) {
 	$('#grade-listings tbody').empty();
 	var eventList = courseEventInfo[courseID];
-	console.log(eventList);
 	$.each(eventList, function(id, o) {
 		$(o).each( function() {
 		$('#grade-listings').append('<tr class="list-item" data-href="#"><td>' + o.gradeEvent + '</td><td>' + o.term + '</td><td>' + o.parcial + '</td><td>' + o.noStudents + '</td></tr>');

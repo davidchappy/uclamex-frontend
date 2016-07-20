@@ -58,6 +58,11 @@ a:hover {
 	color: #fff;
 }
 
+.active {
+	color: #fff !important;
+	background: #3C6AE2; 
+}
+
 input {
 	border:none;
 }
@@ -752,11 +757,6 @@ svg.selected-arrow {
 	background: #3C6AE2; 
 }
 
-.calif-subnav .active {
-	color: #fff;
-	background: #3C6AE2; 
-}
-
 .header-button-right {
 	float: right;
 	margin-right: 20px;
@@ -778,7 +778,7 @@ svg.selected-arrow {
 	margin-top: 17.5px;
 }
 
-/* add grades pop-up form */
+/* pop-up form for adding grades */
 
 .modal-popup {
 	display: none;
@@ -807,32 +807,32 @@ svg.selected-arrow {
 
 .form-header {
 	background: #3C6AE2;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	font-weight: 400;
 	color: #fff;
 	text-align: center;
 	height: 55px;
 	line-height: 55px;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	position: relative;
 }
 
-#close-form {
-	font-size: 1.2em;
-	color: rgba(255,255,255,.8);
+.remove-x {
+	fill: rgba(255,255,255,.7);
+	height: 20px;
+	width: 20px;
 	position: absolute;
 	right: 15px;
-	top: 2px;
+	top: 20px;
 	cursor: pointer;
-	font-weight: 400;
+}
+
+.remove-x:hover {
+	fill: rgba(255,255,255,1);
 }
 
 #add-grades-popup form {
 	padding: 20px;
-}
-
-fieldset {
-	margin-bottom: 1rem;
 }
 
 #add-grades-popup form label {
@@ -872,12 +872,16 @@ input[type="radio"] {
 }
 
 form hr {
-  border: 0;
-  display: block;
-  width: 96%;               
-  background-color: rgba(151,151,151,.6);
-  height: 1px;
-  margin-bottom: 2rem;
+	border: 0;
+	display: block;
+	width: 96%;               
+	background-color: rgba(151,151,151,.6);
+	height: 1px;
+	margin-bottom: 2rem;
+}
+
+.form-row1 {
+	margin-bottom: 1rem;
 }
 
 .student-grade-listing {
@@ -885,30 +889,34 @@ form hr {
 	margin-bottom: 1rem;
 }
 
-.student-grade-listing label,
-.student-grade-listing select,
-.student-grade-listing fieldset {
-	display: block;
+.student-grades-header {
+	margin-bottom: .5rem;
 }
 
-.alumno-select,
-.new-grade-field {
+.student-grade-row {
+	width: 100%;
+	position: relative;
 	margin-bottom: 1rem;
 }
 
-/*.student-grade-listing .column-2 {
-	position: absolute;
-	left: 0;
-}*/
-
-.student-grade-listing .column {
-	position: absolute;
-	right: 18px;
+.student-grade-listing th,
+.student-grade-listing td {
+	padding: 0;
+	margin-right: 20px;
 }
 
-.student-grade-listing .column-2 select {
-	width: 80%;
-	margin-right: 20%;
+.student-grade-listing select {
+	display: block;
+}
+
+.student-grade-listing th:first-of-type,
+.alumno-select  {
+	width: 350px;
+}
+
+.student-grade-listing th:nth-of-type(2),
+#alumno tr:nth-of-type(2) td:nth-of-type(2) {
+	margin-left: -3px;
 }
 
 .student-grade-listing input[type="text"] {
@@ -925,16 +933,47 @@ form hr {
 	padding: 5px;
 }
 
+.new-grade-container {
+	position: relative;
+	display: inline-block;
+	overflow: visible;
+}
+
+.remove-row {
+	display: none;
+	position: absolute;
+	top: 6px;
+	right: 3px;
+	background: #D0021B;
+	border-radius: 50%;
+	height: 17px;
+	width: 17px;
+	line-height: 14px;
+	background-size: 15px 15px;
+	background-position: center center;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+}
+
+.student-grade-row:hover .remove-row {
+	display: block;
+}
+
 form button {
 	border-radius: 3px;
 	color: #fff;
 	font-weight: 400;
 }
 
-.new-student-row {
-	padding: 4px 10px;
+.new-student-button {
+	padding: 4px 14px 4px 12px;
 	background: #3C6AE2;
 	margin-bottom: 3rem;
+}
+
+.new-student-button:hover {
+	background: rgba(60,106,226,.7);
 }
 
 .submit-form {
@@ -944,8 +983,13 @@ form button {
 	height: 40px;
 	font-size: 1em;
 	font-weight: 700;
+	display: block;
+	margin: 0 auto;
 }
 
+.submit-form:hover {
+	background:rgba(245,166,35,.7)
+}
 
 
 /* por-clase */

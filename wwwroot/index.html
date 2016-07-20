@@ -62,7 +62,7 @@
   	<div class="sidebar" id="sidebar">
       
       <div class="sidebar-header">
-        <a class="brand" href="#">Universidad Cristiana de Las Américas</a>
+        <a class="brand" href="/">Universidad Cristiana de Las Américas</a>
       </div>
 
       <div class="sidebar-body">
@@ -104,7 +104,7 @@
       <div class="form-header">
         
         <h2>Agregue Calificaciones</h2>
-        <a href="#" id="close-form">x</a>
+        <svg id="close-form" class="remove-x"><use xlink:href="#remove-x"/></svg>
 
       </div>
 
@@ -114,73 +114,70 @@
           <div class="column">
             <label for="carrera">Carrera</label>
             <select name="carrera" id="carrera">
-              <option value="" disabled selected>Carreras</option>
-              <option value="Música">Música</option>
-              <option value="Teología">Teología</option>
+              <option value="" disabled selected hidden>Carreras</option>
             </select>
           </div>
           <div class="column">
             <label for="clase">Clase</label>
             <select name="clase" id="clase">
-              <option value="" disabled selected>Escoja una Carrera</option>
-<!--               <option value="Introducción a la Música">Introducción a la Música</option>
-              <option value="Armonía I">Armonía I</option> -->
+              <option value="" disabled selected hidden>Escoja una Carrera</option>
             </select>            
           </div>
           <div class="column">
             <label for="evento">Tarea/Evento</label>
             <select name="evento" id="evento">
-              <option value="" disabled selected>Escoja una Clase</option>
-<!--               <option value="Examen 1">Examen 1</option>
-              <option value="Control 2">Control 2</option> -->
+              <option value="" disabled selected hidden>Escoja una Clase</option>
             </select>  
           </div>
         </fieldset>
 
-        <fieldset>
-          <div class="column">
+        <fieldset id="form-row2">
+
+          <fieldset class="column term-radio">
             <label for="term">Tetramestre</label>
             <input type="radio" name="term" value="1"><span class="radio-label">1</span>
             <input type="radio" name="term" value="2"><span class="radio-label">2</span>
             <input type="radio" name="term" value="3"><span class="radio-label">3</span>
-          </div>
+          </fieldset>
 
-          <div class="column">
-            <label for="term">Parcial</label>
+          <fieldset class="column parcial-radio">
+            <label for="parcial">Parcial</label>
             <input type="radio" name="parcial" value="1"><span class="radio-label">1</span>
             <input type="radio" name="parcial" value="2"><span class="radio-label">2</span>
             <input type="radio" name="parcial" value="3"><span class="radio-label">3</span>
-          </div>
+          </fieldset>
 
         </fieldset>
 
         <hr>
 
         <fieldset class="student-grade-listing">
-          <div class="column-2">
-            <label for="alumnos">Alumno</label>
-            <fieldset id="alumnos">
-              <select name="alumno" class="alumno-select">
-                <option value="" disabled selected>Escoga un alumno</option>
-                <option class="alumno-option" value="Jordan Chapman">Jordan Chapman</option>
-                <option class="alumno-option" value="Nathan Chapman">Nathan Chapman</option>
-              </select>
-            </fieldset>
-          </div>
-          <div class="column">
-            <label for="grades">Calificación</label>
-            <fieldset id="grades">
-              <input type="text" class="new-grade-field" name="grade" placeholder="Calificación"> 
-            </fieldset>
-          </div>
-        </fieldset>
+          <table>
 
-        <button id="add-student-button" class="new-student-row">+Alumno</button>
+            <tbody id="alumno">
+              <tr class="student-grades-header">
+                <th>Alumno</th>
+                <th>Calificación</th>
+              </tr>
+              <tr class="student-grade-row">
+                <td>
+                  <select name="alumno" class="alumno-select first-student">
+                    <option value="" disabled selected hidden>Escoga un alumno</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" class="new-grade-field" name="grade" placeholder="Calificación">
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+
+        <button id="add-student-button" class="new-student-button">+Alumno</button>
 
         <hr>
-        <center>
-          <button class="submit-form" id="submit-student-form" type="submit">Enviar</button>
-        </center>
+        
+        <button class="submit-form" id="submit-student-form" type="submit">Enviar</button>
 
       </form>
 
