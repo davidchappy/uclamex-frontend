@@ -12,8 +12,6 @@ $(".nav-item").on({
 		$(this).addClass('active');
 		$(this).siblings().children('a').children('svg.selected-arrow').detach();
 		$(this).children('a').append('<svg class="selected-arrow"><use xlink:href="#selected-arrow"/></svg>');
-		// $(this).siblings().children('a').detach('svg.selected-arrow'); 
-		// $(this).children('a').append('<svg class="selected-arrow"><use xlink:href="#selected-arrow"/></svg>');
 	},
 	mouseenter: function() {
 		$(this).siblings().removeClass('selected');
@@ -72,27 +70,35 @@ function getPage(targetID, fileName) {
 }
 
 // Get main content pages by link's id name
-function getMainPage(pageName) {
+function getMainPage(pageurl) {
 	$.ajax({
-		url: pageName + ".html",
+		url: pageurl,
 		cache: false
 	}).done(function( h ) {
-			$("#main-content").html(h);
-			// these are temporary and should be replaced with a function that serves all Ajax-loaded pages
-			$('.column-calif-clases').hide();
-			$('.column-calif-grades').hide();
-			displayMajors();
+			$('#main-content').html(h);
+			loadCalificaciones();
 	});	
-}
+	// Page URLs are visible in browser path
+	// if(pageurl!=window.location){
+	// 	window.history.pushState({path:pageurl},'',pageurl);
+	// }
+};
+
+// Tie each nav item to the getMainPage() function
+$(function(){
+	$('li.nav-item a').click(function(e){
+		e.preventDefault();
+		var pageurl = $(this).attr('href');
+		getMainPage(pageurl);
+		// return false;
+	});
+});
+
 
 // Function and request to bind nav links to the getPage function
 function bindNavLinks() {
-	$(".nav-item a").each(function() {
-		var idName = $(this).attr("id");
-		$(this).click(function() {
-			getMainPage(idName);
-		});
-	}); 
+	// override default click action
+
 }
 bindNavLinks();
 
@@ -215,6 +221,15 @@ var studentsByEvent = {
 	}
 }
 
+// *** Function to load default (por clase) view - called by getMainPage() function *** //
+function loadCalificaciones() {
+	$('.column-calif-clases').hide();
+	$('.column-calif-grades').hide();
+	displayMajors();
+}
+
+
+
 // *** Add Calificaciones Form *** //
 
 $(document).ajaxComplete(function(event, xhr, settings) { //make sure page is fully loaded
@@ -292,7 +307,7 @@ $('#close-form').click(function(event) {
 // Add new student row
 $('#add-student-button').click(function(event) {
 	event.preventDefault();
-	$('#alumno').append('<tr class="student-grade-row"><td><select name="alumno" class="alumno-select new-row"><option value="" disabled selected hidden>Escoga un alumno</option></select></td><td><input type="text" class="new-grade-field" name="grade" placeholder="Calificación"></td><td><span class="remove-row"></span></td>—</tr>');
+	$('#alumno').append('<tr class="student-grade-row"><td><select name="alumno" class="alumno-select new-row"><option value="" disabled selected hidden>Escoga un alumno</option></select></td><td><input type="text" class="new-grade-field" name="grade" placeholder="Calificación"></td><td><span class="remove-row">—</span></td></tr>');
 	var id = $('#evento option:selected').attr('data-eventid');
 	var studentList = studentsByEvent[id];
 	$.each(studentList, function(id, name) {
